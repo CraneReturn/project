@@ -6,6 +6,7 @@ import Login from '../pages/Login';
 import Register from '../pages/Register';
 import StudentManage from '../pages/admin/StudentManger';
 import FileManage from '../pages/FileManger';
+import AdminLayout from '../component/adminLayout/adminLayout';
 
 
 export default function AppRouter() {
@@ -16,26 +17,23 @@ export default function AppRouter() {
                 < Route path="/register" element={< Register />} />
 
 
-                {/* admin 专属页面  学生管理页面*/}
                 <Route
-                    path="/admin/students"
                     element={
-                        < ProtectedRoute allowRoles={["admin"]} >
-                            <StudentManage />
+                        <ProtectedRoute allowRoles={["admin", "student"]}>
+                            <AdminLayout />
                         </ProtectedRoute>
                     }
-                />
-
-
-                {/* student和admin 可访问文件管理 */}
-                <Route
-                    path="/student/files"
-                    element={
-                        < ProtectedRoute allowRoles={["student", "admin"]} >
-                            <FileManage />
-                        </ProtectedRoute>
-                    }
-                />
+                >
+                    <Route path="/student/files" element={<FileManage />} />
+                    <Route
+                        path="/admin/students"
+                        element={
+                            <ProtectedRoute allowRoles={["admin"]}>
+                                <StudentManage />
+                            </ProtectedRoute>
+                        }
+                    />
+                </Route>
 
 
                 < Route path="*" element={< Login />} />

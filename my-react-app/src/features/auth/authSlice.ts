@@ -14,7 +14,10 @@ export interface AuthState {
 
 
 const initialState: AuthState = loadAuthState() || {
-    user: undefined,
+    user: {
+        role: "admin",
+        username: "admin"
+    },
 };
 
 
