@@ -7,6 +7,7 @@ import Register from '../pages/Register';
 import StudentManage from '../pages/admin/StudentManger';
 import FileManage from '../pages/FileManger';
 import AdminLayout from '../component/adminLayout/adminLayout';
+import FlowCanvas from '../pages/WorkFlow';
 
 
 export default function AppRouter() {
@@ -30,6 +31,14 @@ export default function AppRouter() {
                         element={
                             <ProtectedRoute allowRoles={["admin"]}>
                                 <StudentManage />
+                            </ProtectedRoute>
+                        }
+                    />
+                    <Route
+                        path="/student/work"
+                        element={
+                            <ProtectedRoute allowRoles={["admin"]}>
+                                <FlowCanvas />
                             </ProtectedRoute>
                         }
                     />
